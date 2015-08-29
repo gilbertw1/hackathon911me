@@ -9,9 +9,8 @@ var q = require('q');
 var apiAccess = require('../apiAccess.json');
 
 router.get('/', function (request, response) {
-    // todo: get latitude and longitude from request
-    var latitude = '-73.989',
-        longitude = '40.733';
+    var latitude = typeof request.query.latitude !== 'undefined' ? request.query.latitude: '0',
+        longitude = typeof request.query.longitude !== 'undefined' ? request.query.longitude: '0';
 
     try {
         reverseGeocode(latitude, longitude).then(function (location) {
