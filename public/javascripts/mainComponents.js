@@ -48,7 +48,9 @@ var Address = React.createClass({
 		            'longitude': position.coords.longitude
 		        },
 		        success: function (data) {
-		        	this.setState({data: data});
+		        	this.setState({
+		        		location: "I am at " + data.location + "."
+		        	});
 		        }.bind(this),
 		        error: function (x,s,e) {
 		            console.error(s,e);
@@ -57,7 +59,9 @@ var Address = React.createClass({
 		}.bind(this));
 	},
 	getInitialState: function () {
-		return {data: {}};
+		return {
+			location: "Getting your location..."
+		};
 	},
 	componentDidMount: function () {
 		this.loadReverseGeolocationFromServer();
@@ -69,7 +73,7 @@ var Address = React.createClass({
 				<img src="../images/speechArrow.svg"></img>
 			</div>
 			<div className="locationAddress">
-				<h3>{this.state.data.location}</h3>
+				<h3>{this.state.location}</h3>
 			</div>
 		</div>
 		);
@@ -113,10 +117,10 @@ var GeoLocate = React.createClass({
 	},
 	render: function() {
 		return (
-			<div className="locationCords">
-				<h3>Latitude: </h3><p>{this.state.latitude}</p>
-				<h3>Longitude: </h3><p>{this.state.longitude}</p>
-			</div>
+			<ul className="locationCords">
+				<li>Latitude: {this.state.latitude}</li>
+				<li>Longitude: {this.state.longitude}</li>
+			</ul>
 		);
 	}
 });
