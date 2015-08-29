@@ -9,8 +9,8 @@ var q = require('q');
 var apiAccess = require('../apiAccess.json');
 
 router.get('/', function (request, response) {
-    var latitude = typeof request.query.latitude !== 'undefined' ? request.query.latitude: '0',
-        longitude = typeof request.query.longitude !== 'undefined' ? request.query.longitude: '0';
+    var latitude = request.query.latitude !== undefined ? request.query.latitude : '0',
+        longitude = request.query.longitude !== undefined ? request.query.longitude : '0';
 
     try {
         reverseGeocode(latitude, longitude).then(function (location) {
@@ -25,13 +25,13 @@ router.get('/', function (request, response) {
 });
 
 var reverseGeocode = function (latitude, longitude) {
-    var deferred = q.defer();
-    var apiPath = util.format(
-        'https://api.mapbox.com/v4/geocode/mapbox.places/%s,%s.json?access_token=%s',
-        longitude,
-        latitude,
-        apiAccess.mapbox.publicToken
-    );
+    var deferred = q.defer(),
+        apiPath = util.format(
+            'https://api.mapbox.com/v4/geocode/mapbox.places/%s,%s.json?access_token=%s',
+            longitude,
+            latitude,
+            apiAccess.mapbox.publicToken
+        );
 
     https.get(apiPath, function (response) {
         var data = '';
@@ -42,7 +42,7 @@ var reverseGeocode = function (latitude, longitude) {
         response.on('end', function () {
             try {
                 var rawData = JSON.parse(data);
-                if (typeof rawData.features !== 'undefined' &&
+                if (rawData.features !== undefined &&
                         Array.isArray(rawData.features) &&
                         rawData.features.length > 0) {
                     deferred.resolve(rawData.features[0].place_name);
