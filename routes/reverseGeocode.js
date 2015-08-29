@@ -8,20 +8,21 @@ var util = require('util');
 var q = require('q');
 var apiAccess = require('../apiAccess.json');
 
-router.get('/reverseGeocode', function (request, response) {
+router.get('/', function (request, response) {
+    // todo: get latitude and longitude from request
     var latitude = '-73.989',
         longitude = '40.733';
 
-    var location;
     try {
-        location = reverseGeocode(latitude, longitude).resolve();
+        reverseGeocode(latitude, longitude).then(function (location) {
+            response.send(JSON.stringify({
+                location: location
+            }));
+        });
+
     } catch (err) {
         throw err;
     }
-
-    response.send(JSON.stringify({
-        description: location
-    }));
 });
 
 var reverseGeocode = function (latitude, longitude) {
@@ -42,10 +43,10 @@ var reverseGeocode = function (latitude, longitude) {
         response.on('end', function () {
             try {
                 var rawData = JSON.parse(data);
-                if (rawData.features !== 'undefined' &&
+                if (typeof rawData.features !== 'undefined' &&
                         Array.isArray(rawData.features) &&
-                        rawData.length > 0) {
-                    deferred.resolve(rawData[0].place_name);
+                        rawData.features.length > 0) {
+                    deferred.resolve(rawData.features[0].place_name);
                 }
             } catch (err) {
                 throw err;
