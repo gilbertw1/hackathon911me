@@ -1,12 +1,39 @@
 
-// var MainBox = React.createClass({
+var MainBox = React.createClass({
+	render: function(){
+		return (
+			<div className="mainBox">
+				<h3>Tell Responder</h3>
+				<Address />
+				<CallButton />
+				<GeoLocate />
+			</div>
+		);
+	}
+});
 
+var Address = React.createClass({
+	render: function(){
+		return (
+		<div className="addressWrapper">
+		<div className="locationAddress">
+			<h3>I am at 233 VARIABLE st</h3>
+		</div>
+		</div>
+		);
+	}
+});
 
-// })
-
-
-
-
+var CallButton = React.createClass({
+	render: function(){
+		return (
+			<div className="callButton">
+				<h1>911</h1>
+			</div>
+		);
+	}
+});
+	
 
 var GeoLocate = React.createClass({
 	getLocation: function() {
@@ -29,7 +56,7 @@ var GeoLocate = React.createClass({
 	},
 	render: function() {
 		return (
-			<div className="geoWrapper">
+			<div className="locationCords">
 				<h3>Latitude: </h3><p>latitude</p>
 				<h3>Longitude: </h3><p>longitude</p>
 			</div>
@@ -37,6 +64,6 @@ var GeoLocate = React.createClass({
 	}
 });
 React.render(
-  <GeoLocate />,
+  <MainBox />,
   document.getElementById('content')
 );
