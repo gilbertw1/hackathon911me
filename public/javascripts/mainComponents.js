@@ -1,6 +1,6 @@
 
 var MainBox = React.createClass({
-	render: function(){
+	render: function () {
 		return (
 			<div className="mainBox">
 				<h3>Tell Responder</h3>
@@ -14,7 +14,6 @@ var MainBox = React.createClass({
 
 var Address = React.createClass({
 	loadReverseGeolocationFromServer: function () {
-		console.log(this);
 		navigator.geolocation.getCurrentPosition(function (position) {
 		    $.ajax({
 		        url: this.props.url,
@@ -42,9 +41,9 @@ var Address = React.createClass({
 	render: function(){
 		return (
 		<div className="addressWrapper">
-		<div className="locationAddress">
-			<h3>{this.state.data.location}</h3>
-		</div>
+			<div className="locationAddress">
+				<h3>{this.state.data.location}</h3>
+			</div>
 		</div>
 		);
 	}
@@ -62,29 +61,31 @@ var CallButton = React.createClass({
 	
 
 var GeoLocate = React.createClass({
-	getLocation: function() {
-		if (navigator.geolocation) {
-			var location = this;
-				navigator.geolocation.getCurrentPosition(function(position) {
-					app.position = position;
-					console.log("location set");
-				});
-			} 
-		else {
-			console.error("Geolocation no enabled");
-		}
+	loadCoordinates: function () {
+		navigator.geolocation.getCurrentPosition(function (position) {
+			var latitude = Math.round(position.coords.latitude * 10000) / 10000,
+				longitude = Math.round(position.coords.longitude * 10000) / 10000;
+
+			this.setState({
+				latitude: latitude,
+				longitude: longitude
+			});
+		}.bind(this));
 	},
-	setLocation: function() {
-		var latitude = position.coords.latitude;
-		var longitude = position.coords.longitude;
-		console.log(latitude);
-		console.log(longitude);
+	getInitialState: function () {
+		return {
+			latitude: 'Loading',
+			longitude: 'Loading'
+		};
+	},
+	componentDidMount: function () {
+		this.loadCoordinates();
 	},
 	render: function() {
 		return (
 			<div className="locationCords">
-				<h3>Latitude: </h3><p>latitude</p>
-				<h3>Longitude: </h3><p>longitude</p>
+				<h3>Latitude: </h3><p>{this.state.latitude}</p>
+				<h3>Longitude: </h3><p>{this.state.longitude}</p>
 			</div>
 		);
 	}
