@@ -1,5 +1,5 @@
 {
     "mapbox" : {
-        "publicToken" : "your mapbox public key goes here"
+        "publicToken" : "pk.eyJ1Ijoic3JhbGVjaSIsImEiOiJBTkxHd1BVIn0.DqWevgidBre7RS8r1QSF-A"
     }
 }
