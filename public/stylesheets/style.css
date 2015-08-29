@@ -7,7 +7,7 @@
 
 .headerBox {
   width: 100%;
-  height: 50px;
+  height: 60px;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -19,34 +19,42 @@
   font-weight: 300;
   background-color: #3d3b38;
   color: white;
-  overflow-x: scroll;
+  opacity: 8;
 }
 
 .blueBand {
   background-color: #3498db;
   width: 100%;
-  height: 10px;
+  height: 6px;
   margin-top: 4px;
   margin-bottom: 4px;
 }
 
-.orangeBand {
-  background-color: #e06d20;
-  width: 100%;
-  height: 10px;
-}
 .mainBox {
   width: 100%;
-  background-image: url(../images/halfTone.jpg);
-  background: repeat;
   text-align: center;
-  color: #383838;
-  font-size: 1.5em;
+  color: #e0e0e0;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: #181919;
+  overflow-y: scroll;
 }
 
 .addressWrapper {
-  width: 90%;
+  width: 80%;
+  height: 300px;
+  background-color: white;
+  text-align: center;
+  padding-top: 20px;
+  position: relative;
+  margin: 0 auto;
+  margin-top: 40px;
+  font-size: 2em;
 }
+
 .locationAddress {
   font-size: 2em;
   color: black;
@@ -56,18 +64,27 @@
 
 .callButton {
   width: 80%;
-  height: 300px;
+  height: 250px;
   border-radius: 15px;
   background-color: #c0392b;
   color: white;
-  font-size: 3em;
+  line-height: 250px;
+  font-size: 4em;
   font-weight: bold;
+  transition: .5s ease all;
+  position: relative;
+  margin: 0 auto;
+  margin-top: 40px;
+}
+
+.callButton:hover {
+  background-color: #2ecc71;
 }
 
 .locationCords {
   width: 100%;
   text-align: center;
-  margin-top: 20px;
+  margin-top: 50px;
   margin-bottom: 20px;
-  color: #383838;
+  color: #e2e2e2;
 }
