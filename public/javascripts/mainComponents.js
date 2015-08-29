@@ -1,8 +1,32 @@
 
+var HeaderLink = React.createClass({
+	render: function(){
+		return (
+			<ul className="headerlink">
+				<li onclick='#'>MAP</li>
+				<li onclick='#'>CALL</li>
+				<li onclick='#'>HOSPITALS</li>
+			</ul>
+		);
+	}
+});
+
+var BlueBand = React.createClass({
+	render: function(){
+		return(
+			<div className="blueBand">
+			</div>
+		);
+	}
+});
 var MainBox = React.createClass({
 	render: function () {
 		return (
 			<div className="mainBox">
+				<div className="headerBox">
+					<HeaderLink />
+				</div>
+				<BlueBand />
 				<h3>Tell Responder</h3>
 				<Address url="reverseGeocode"/>
 				<CallButton />
@@ -41,6 +65,9 @@ var Address = React.createClass({
 	render: function(){
 		return (
 		<div className="addressWrapper">
+			<div className="speechArrow">
+				<img src="../images/speechArrow.svg"></img>
+			</div>
 			<div className="locationAddress">
 				<h3>{this.state.data.location}</h3>
 			</div>
@@ -53,6 +80,9 @@ var CallButton = React.createClass({
 	render: function(){
 		return (
 			<div className="callButton">
+				<div className="phoneIcon">
+					<img src="../images/phoneIcon.svg"></img>
+				</div>
 				<h1>911</h1>
 			</div>
 		);
